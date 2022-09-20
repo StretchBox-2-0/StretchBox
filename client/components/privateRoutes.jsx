@@ -1,4 +1,3 @@
-/* eslint-disable react/function-component-definition */
 import { Navigate, Outlet } from 'react-router-dom';
 import React from 'react';
 
