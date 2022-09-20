@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import '../../stylesheets/regionSelector.scss'
-import Body from '../../assets/bodyFrontBack.jpg'
+import '../../stylesheets/regionSelector.scss';
+import Body from '../../assets/bodyFrontBack.jpg';
 
 const RegionSelector = ({value}) => {
   const [currentRegion, setCurrentRegion] = useState('');
@@ -10,11 +10,11 @@ const RegionSelector = ({value}) => {
   const handleRegionClick = e => {
     if (!currentRegion) {
       setCurrentRegion(e.currentTarget.id);
-      e.currentTarget.classList.toggle('activeButton')
+      e.currentTarget.classList.toggle('activeButton');
     }
     else if (currentRegion === e.currentTarget.id) {
       setCurrentRegion('');
-      e.currentTarget.classList.toggle('activeButton')
+      e.currentTarget.classList.toggle('activeButton');
     }
     else {
       // this block of code will only be evaluted if there is already a region selected and highlighted on screen
@@ -24,7 +24,7 @@ const RegionSelector = ({value}) => {
       setCurrentRegion(e.currentTarget.id);
       e.currentTarget.classList.toggle('activeButton');
     }
-  }
+  };
 
   const queryDb = async (e) => {
     // prevent page from refreshing when button is clicked
@@ -55,11 +55,20 @@ const RegionSelector = ({value}) => {
     }
   };
 
+  const bodyParts = ['chest', 'forearms', 'glutes', 'lower_back', 'middle_back', 'hamstrings', 'calves', 'neck','lats','traps','triceps', 'quadriceps', 'biceps', 'abdominals'];
+
+  function createBodyParts() {
+    // for (let i = 0; i < 14; i += 1){
+    // document.createElement('button');
+    // 
+    // }
+  }
+
   return (
     <div className='bodyContainer'>
 
       <h3>Please select the body region(s) that you would like to stretch</h3>
-
+{/* put id in array and iterate, creating multiple buttons */}
       <button id='chest' className='inactiveButton' onClick={handleRegionClick}></button>
       <button id='forearms' className='inactiveButton' onClick={handleRegionClick}></button>
       <button id='glutes' className='inactiveButton' onClick={handleRegionClick}></button>
@@ -94,20 +103,20 @@ const RegionSelector = ({value}) => {
       </div>
 
       
-        <form id='submit'>
-          <input
-            onClick={(e) => {
-              if (currentRegion) queryDb(e);
-              }}
-            type='submit'
-            className='submitBtn'
-            value='SUBMIT'
-          />
-        </form>
+      <form id='submit'>
+        <input
+          onClick={(e) => {
+            if (currentRegion) queryDb(e);
+          }}
+          type='submit'
+          className='submitBtn'
+          value='SUBMIT'
+        />
+      </form>
 
     </div>
-  )
-}
+  );
+};
 
 export default RegionSelector;
 

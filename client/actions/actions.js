@@ -8,3 +8,5 @@ import store from '../store';
 //     type: types.ACTION_NAME,
 //     payload: ID,
 // });
+
+//AK note - file not used, able to delete full file
