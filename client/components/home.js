@@ -25,22 +25,6 @@ const Home = ({ID}) => {
         console.log('Error:', err);
       });
   }, [refresh]);
-
-  const favoriteButton = (e) => {
-    console.log('favorite button works');
-    fetch('/user/fav', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ stretchid: e.target.value.id, name: e.target.value.name }),
-    })
-      .then ((data) => data.json())
-      .then ((data) => {
-        const currentRefresh = !refresh;
-        setRefresh(currentRefresh);
-      });
-  };
   
   const deleteButton = (e) => {
     console.log('delete button works');
@@ -65,7 +49,7 @@ const Home = ({ID}) => {
       <div id="main-flex">
         <div className="dynamic-direction">
           <RegionSelector value={setStretchData}/>
-          <StretchDisplay value={stretchData} handleFavoriteButton = {favoriteButton} />
+          <StretchDisplay value={stretchData} />
           <SavedStretches favoriteStretches={favorites} deleteButton={deleteButton} />
         </div>
         {/* <div class="dynamic-direction">

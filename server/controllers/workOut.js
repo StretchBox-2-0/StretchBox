@@ -39,7 +39,8 @@ workOutController.getExercises = async (req, res, next) => {
             const stretch = {
               muscle: key,
               name: resp.rows[index].name,
-              instructions: resp.rows[index].instructions
+              instructions: resp.rows[index].instructions,
+              id: resp.rows[index].stretch_id
             };
             // save the returned stretch objs in stretchArr
             stretchArr.push(stretch);

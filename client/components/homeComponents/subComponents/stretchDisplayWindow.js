@@ -2,21 +2,21 @@ import React, { useEffect, useState } from 'react';
 import '../../../stylesheets/stretchDisplayWindow.scss';
 import StretchInfo from './stretchInfo';
 
-const StretchDisplayWindow = ({value, handleFavoriteButton}) => {
+const StretchDisplayWindow = ({value, }) => {
   const [stretches, setStretches] = useState([]);
   const [stretchCounter, setStretchCounter] = useState(0);
 
   useEffect(() => {
-    console.log(value);
     const stretchArr = stretches;
     if (value) {
       for (let i = 0; i < value.length; i++) {
         stretchArr.push(<StretchInfo 
           key = {stretchCounter}
+          value = {value[i]}
+          exerciseID = {value[i].id}
           name =  {value[i].name}
           muscle = {value[i].muscle}
           instructions = {value[i].instructions}
-          favoriteButton = {handleFavoriteButton}
         />);
       }
     }
