@@ -14,6 +14,7 @@ const Home = ({ID}) => {
   const [refresh, setRefresh] = useState(true);
   const [favorites, setFavorites] = useState([]);
 
+if(ID) {
   useEffect(() => {
     console.log('fetching');
     fetch(`/user/fav`)
@@ -24,23 +25,9 @@ const Home = ({ID}) => {
       .catch((err) => {
         console.log('Error:', err);
       });
-  }, [refresh]);
-  
-  const deleteButton = (e) => {
-    console.log('delete button works');
-    fetch('/user/fav', {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ stretchid: e.target.value.id, name: e.target.value.name }),
-    })
-      .then((data) => data.json())
-      .then((data) => {
-        const currentRefresh = !refresh;
-        setRefresh(currentRefresh);
-      });
-  };
+  }, [refresh])
+};
+
 
   return (
     <>
