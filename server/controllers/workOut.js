@@ -22,6 +22,7 @@ workOutController.getExercises = async (req, res, next) => {
         if (value >= resp.rows.length) {
           // push all rows to array
           for (let i = 0; i < resp.rows.length; i++) {
+            console.log(resp.rows[i].stretch_id)
             stretchArr.push({
               muscle: key,
               name: resp.rows[i].name,

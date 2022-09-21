@@ -9,15 +9,14 @@ import Login from './login';
 import '../stylesheets/home.scss';
 
 
-const Home = () => {
+const Home = ({ID}) => {
   const [stretchData, setStretchData] = useState('');
-  const [ID, setID] = useState('');
   const [refresh, setRefresh] = useState(true);
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
     console.log('fetching');
-    fetch(`/favorites/${ID}`)
+    fetch(`/user/fav`)
       .then((res) => res.json())
       .then((data) => {
         setFavorites(data);
@@ -27,58 +26,47 @@ const Home = () => {
       });
   }, [refresh]);
 
-  //this handle click function handles the onclick in login.js
-  const handleClickLogin = (e) => {
-    console.log('handle click login works');
-    
-    e.preventDefault();
-    const username = e.target[0].value;
-    const password = e.target[1].value;
-    fetch('/user/login', {
+  const favoriteButton = (e) => {
+    console.log('favorite button works');
+    fetch('/user/fav', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({username:username, password:password}),
+      body: JSON.stringify({ stretchid: e.target.value.id, name: e.target.value.name }),
     })
-      .then((data) =>data.json())
-      .then((data) => {
-      //set the id in state to be used in future components
-        setID(data.userId);
-        // TBD depending on how the data looks, maybe look at diff key
-        e.target[0].value = '';
-        e.target[0].value = '';
+      .then ((data) => data.json())
+      .then ((data) => {
+        const currentRefresh = !refresh;
+        setRefresh(currentRefresh);
       });
   };
-
-  const favoriteButton = (e) => {
-    console.log('favorite button works');
-    //   fetch('// to add path to database', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(name: e.target.value.name, muscle: e.target.value.muscle, instructions: e.target.value.instructions),
-    //   })
-    //   .then ((data) => data.json())
-    //   .then ((data) => {
-    //     // do something with data
-    //    const currentRefresh = !refresh;
-    //    setRefresh(currentRefresh)
-    //   })
-
+  
+  const deleteButton = (e) => {
+    console.log('delete button works');
+    fetch('/user/fav', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ stretchid: e.target.value.id, name: e.target.value.name }),
+    })
+      .then((data) => data.json())
+      .then((data) => {
+        const currentRefresh = !refresh;
+        setRefresh(currentRefresh);
+      });
   };
 
   return (
     <>
     
-      <Header handleClickLogin={handleClickLogin} />
+      <Header handleClickLogin />
       <div id="main-flex">
         <div className="dynamic-direction">
           <RegionSelector value={setStretchData}/>
           <StretchDisplay value={stretchData} handleFavoriteButton = {favoriteButton} />
-          <SavedStretches />
-          <button onClick={(e) => favoriteButton()}>fave button test</button>
+          <SavedStretches favoriteStretches={favorites} deleteButton={deleteButton} />
         </div>
         {/* <div class="dynamic-direction">
           <SavedStretches />

@@ -1,26 +1,29 @@
 import React from 'react';
 
-const Login = ({setID}) => {
-  const handleClickLogin = (e) => {
+const Signup = ({ setID }) => {
+  const handleClickSignup = (e) => {
     e.preventDefault();
-    //get input fields and assign for request body use
+    //take input fields and save to variables for request body
     const username = e.target[0].value;
     const password = e.target[1].value;
-    fetch('/user/login', {
+
+    fetch('/user/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ username: username, password: password }),
     })
-      .then((data) => data.json())
-      .then((data) => {
+      .then((data2) => data2.json())
+      .then((response) => {
+
         //set the id in state to be used in future components
-        setID(data);
-        //below 2 lines reset the forms after submit
+        setID(response);
+
+        // reset input fields to blank
         e.target[0].value = '';
         e.target[1].value = '';
-        //redirect user back to homepage after successful login
+        //redirect to home page
         location.href = "/";
       })
       .catch((err) => {
@@ -28,19 +31,19 @@ const Login = ({setID}) => {
       });
   };
 
-  return (
-    <div className="login">
-      <form id='loginForm' onSubmit={(e) => handleClickLogin(e)}> 
-        <label>Username:</label> 
-        <input placeholder='Username'></input>
-        <label>Password:</label>  
-        <input type='password' placeholder='Password'></input>
-        <input type= 'submit' value='Login'></input>
 
+  return (
+    <div className="signup">
+      <form id='signup' onSubmit={(e) => handleClickSignup(e)}>
+        <label>Username:</label>
+        <input placeholder='Username'></input>
+        <label>Password:</label>
+        <input type='password' placeholder='Password'></input>
+        <input type='submit' value='Signup'></input>
       </form>
     </div>
 
   );
 };
 
-export default Login;
+export default Signup;
