@@ -17,7 +17,7 @@ const userRoute = require('./routes/user');
 const favRoute = require('./routes/favRoute'); 
 // const userRoute = require('./routes/user')
 
-// app.use('/workout', workOutRoute);
+app.use('/workout', workOutRoute);
 app.use('/user', userRoute); 
 
 
