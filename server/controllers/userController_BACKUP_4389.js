@@ -1,4 +1,4 @@
-// const request = require("request");
+const request = require("request");
 const database = require("../model");
 const bcrypt = require("bcryptjs");
 const SALT_WORK_FACTOR = 10;
@@ -19,7 +19,7 @@ userController.createUser = async (req, res, next) => {
 
     const query = `INSERT INTO USERS (userid, username, password) VALUES( ${insertedId}, '${username}', '${password}')`;
 
-    const dbResults = await database.query(query);  
+    const dbResults = await database.query(query);
 
     // store userID to locals to sendback to front-end
     res.locals.userID = insertedId;
@@ -40,6 +40,18 @@ userController.verifyUser = async (req, res, next) => {
 
     const query = `SELECT * FROM USERS WHERE username = '${username}'`;
     const dbResults = await database.query(query);
+<<<<<<< HEAD
+    
+    const passwordCorrect = await bcrypt.compare(
+      password,
+      dbResults.passwordHash
+      );
+      
+      if (passwordCorrect) {
+      res.locals.userId = dbResults[0].userId; 
+      return next(); 
+    }
+=======
     console.log(dbResults, "dbResults");
     // const passwordCorrect = await bcrypt.compare(
     //   password,
@@ -50,10 +62,11 @@ userController.verifyUser = async (req, res, next) => {
     res.locals.userID = dbResults.rows[0].userid;
     return next();
     // }
+>>>>>>> dev
   } catch (err) {
     return next({
       log: "error verifying user",
-      message: { err: `error verifying user ${err}` },
+      message: { err: "error verifying user" },
     });
   }
 };

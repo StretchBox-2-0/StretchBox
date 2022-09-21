@@ -2,6 +2,10 @@ const express = require("express");
 const router = express.Router();
 const userController = require("../controllers/userController.js");
 const jwtController = require("../controllers/jwtController.js");
+const favRoute = require("../routes/favRoute"); 
+
+
+router.use('/fav', favRoute); 
 
 //  handle login
 router.post(

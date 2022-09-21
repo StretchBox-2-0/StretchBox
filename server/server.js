@@ -14,6 +14,7 @@ app.use(cookieParser());
 
 const workOutRoute = require('./routes/workOut');
 const userRoute = require('./routes/user');
+const favRoute = require('./routes/favRoute'); 
 // const userRoute = require('./routes/user')
 
 // app.use('/workout', workOutRoute);
