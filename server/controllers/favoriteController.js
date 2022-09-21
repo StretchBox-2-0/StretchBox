@@ -29,16 +29,19 @@ favoriteController.getFavorite = async (req, res, next) => {
 //delete user
 favoriteController.deleteFavorite = async (req, res, next) => {
   try {
+    console.log(req.body, 'req.body')
     const { stretchid } = req.body
+    console.log(stretchid, 'stretchid')
     //work with front end to get proper names
     // const { stretchid, name } = req.body;
     const userID = res.locals.user.userId;
+    console.log(userID, 'userID')
     //sql goes here
     const query = `DELETE FROM FAVORITE where combinedid = 'user:${userID},exercise:${stretchid}';`;
     dbResults = await database.query(query);
 
     // store userID to locals to sendback to front-end
-    // res.locals.userID = insertedId;
+    res.locals.deletedID = stretchid;
     return next();
   } catch (err) {
     return next({

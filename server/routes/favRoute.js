@@ -14,6 +14,9 @@ router.get('/',jwtController.verify, favoriteController.getFavorite, (req, res) 
   res.status(200).json(res.locals.favStretches)
 })
 
+router.delete('/', jwtController.verify, favoriteController.deleteFavorite, (req, res) => {
+  res.status(200).json(res.locals.deletedID)
+})
 // delete one request
 module.exports = router;
 

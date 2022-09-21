@@ -11,23 +11,20 @@ import '../stylesheets/home.scss';
 
 const Home = ({ ID }) => {
   const [stretchData, setStretchData] = useState('');
-  const [refresh, setRefresh] = useState(true);
+  const [refresh, setRefresh] = useState(false);
   const [favorites, setFavorites] = useState([]);
 
-
   useEffect(() => {
-      console.log('fetching');
-      fetch(`/user/fav`)
-        .then((res) => res.json())
-        .then((data) => {
-          setFavorites(data);
-        })
-        .catch((err) => {
-          console.log('Error:', err);
-        });
+    console.log('fetching');
+    fetch(`/user/fav`)
+      .then((res) => res.json())
+      .then((data) => {
+        setFavorites(data);
+      })
+      .catch((err) => {
+        console.log('Error:', err);
+      });
   }, [refresh])
-
-
 
   return (
     <>
@@ -37,7 +34,8 @@ const Home = ({ ID }) => {
         <div className="dynamic-direction">
           <RegionSelector value={setStretchData} />
           <StretchDisplay value={stretchData} pgRefresh={setRefresh} currRefresh={refresh} />
-          <SavedStretches favoriteStretches={favorites} pgRefresh={setRefresh} currRefresh={refresh} />
+          {/* pass down setFavorites to savedStretches so it can use when it is deleted */}
+          <SavedStretches favoriteStretches={favorites} setRefresh={setRefresh} refresh={refresh} />
         </div>
         {/* <div class="dynamic-direction">
           <SavedStretches />

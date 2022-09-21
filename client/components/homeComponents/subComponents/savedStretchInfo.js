@@ -1,11 +1,12 @@
 import React from 'react';
 import '../../../stylesheets/stretchinfo.scss';
 
-const SavedStretchInfo = ({ stretch, pgRefresh, currRefresh }) => {
+//dont forget to add it as a prop
+const SavedStretchInfo = ({ stretch, setRefresh, refresh }) => {
 
   let muscle = '';
   for (const key in stretch) {
-    if (stretch[key] )muscle = key;
+    if (stretch[key] === true) muscle = key;
   }
 
   const deleteButton = (stretchid, name) => {
@@ -19,8 +20,12 @@ const SavedStretchInfo = ({ stretch, pgRefresh, currRefresh }) => {
     })
       .then((data) => data.json())
       .then((data) => {
-        console.log('successfully deleted');
-        pgRefresh(!currRefresh);
+        console.log(`successfully deleted ${data}`);
+
+        //const filteredStretches = stretches.filter(excluding the ${data})
+        //setSavedStretches(filteredStretches)
+        const newRefresh = !refresh
+        setRefresh(newRefresh);
       });
   };
 
@@ -33,7 +38,7 @@ const SavedStretchInfo = ({ stretch, pgRefresh, currRefresh }) => {
       <div className="instructions">
         <p><strong>Instructions:</strong> {stretch.instructions}</p>
       </div>
-      <button value={stretch} onClick={() => { deleteButton(stretch.id, stretch.name); }}>Favorite</button>
+      <button value={stretch} onClick={() => { deleteButton(stretch.stretch_id, stretch.name); }}>Delete</button>
     </div>
   );
 };
