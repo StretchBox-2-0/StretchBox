@@ -38,18 +38,18 @@ userController.verifyUser = async (req, res, next) => {
     if (!username || !password)
       return next("Missing username or password in the createUser controller");
 
-    const query = "SELECT * FROM USERS WHERE username = username";
+    const query = `SELECT * FROM USERS WHERE username = '${username}'`;
     const dbResults = await database.query(query);
+    console.log(dbResults, "dbResults");
+    // const passwordCorrect = await bcrypt.compare(
+    //   password,
+    //   dbResults.passwordHash
+    // );
 
-    const passwordCorrect = await bcrypt.compare(
-      password,
-      dbResults.passwordHash
-    );
-
-    if (passwordCorrect) {
-      res.locals.userId = dbResults[0].userId;
-      return next();
-    }
+    // if (passwordCorrect) {
+    res.locals.userID = dbResults.rows[0].userid;
+    return next();
+    // }
   } catch (err) {
     return next({
       log: "error verifying user",
