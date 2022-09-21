@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Login = (handleClickLogin) => {
-  document.getElementById('loginForm').addEventListener('submit', handleClickLogin);
   return (
     <div className="login">
       <form id='loginForm'> 
