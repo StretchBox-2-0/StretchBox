@@ -16,7 +16,7 @@ const Home = ({ID}) => {
 
   useEffect(() => {
     console.log('fetching');
-    fetch(`/favorites/${ID}`)
+    fetch(`/user/fav`)
       .then((res) => res.json())
       .then((data) => {
         setFavorites(data);
@@ -28,20 +28,34 @@ const Home = ({ID}) => {
 
   const favoriteButton = (e) => {
     console.log('favorite button works');
-      fetch('/user/fav', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ stretchid: e.target.value.id, name: e.target.value.name }),
-      })
+    fetch('/user/fav', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ stretchid: e.target.value.id, name: e.target.value.name }),
+    })
       .then ((data) => data.json())
       .then ((data) => {
-        // do something with data
-       const currentRefresh = !refresh;
+        const currentRefresh = !refresh;
         setRefresh(currentRefresh);
-      })
-
+      });
+  };
+  
+  const deleteButton = (e) => {
+    console.log('delete button works');
+    fetch('/user/fav', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ stretchid: e.target.value.id, name: e.target.value.name }),
+    })
+      .then((data) => data.json())
+      .then((data) => {
+        const currentRefresh = !refresh;
+        setRefresh(currentRefresh);
+      });
   };
 
   return (
@@ -52,7 +66,7 @@ const Home = ({ID}) => {
         <div className="dynamic-direction">
           <RegionSelector value={setStretchData}/>
           <StretchDisplay value={stretchData} handleFavoriteButton = {favoriteButton} />
-          <SavedStretches />
+          <SavedStretches favoriteStretches={favorites} deleteButton={deleteButton} />
         </div>
         {/* <div class="dynamic-direction">
           <SavedStretches />
