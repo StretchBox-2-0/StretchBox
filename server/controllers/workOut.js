@@ -1,21 +1,11 @@
-<<<<<<< HEAD:server/controllers/apiController.js
-const request = require('request')
-const database = require('../model');
-=======
 const request = require('request');
-const database = require ('../model');
->>>>>>> dev:server/controllers/workOut.js
+const database = require('../model');
 
 const workOutController = {};
 
 //This api takes in all keys from req.body then makes an individual call to the database
 //it then randomly selects one stretch from the call and returns it to res.locals
-<<<<<<< HEAD:server/controllers/apiController.js
-apiController.getExercises = async (req, res, next) => {
-  // console.log(req.body);
-=======
 workOutController.getExercises = async (req, res, next) => {
->>>>>>> dev:server/controllers/workOut.js
   const keysArr = Object.keys(req.body);
   // create an array of stretch objs to send back
   const stretchArr = [];
@@ -57,30 +47,21 @@ workOutController.getExercises = async (req, res, next) => {
             i++;
           }
         }
+
+
       })
+
       .catch(err => {
         console.log('create stretch array error');
         return next({
           log: 'create stretch array error',
-<<<<<<< HEAD:server/controllers/apiController.js
           message: { er: 'create stretch error' }
-        })
-      })
-  }
-  // save stretchArr to res.locals to be sent back in the following middleware
-  res.locals.stretches = stretchArr;
-  // console.log('final stretchArr', stretchArr);
-  next()
-}
-=======
-          message: { er: 'create stretch error'}
         });
       });
   }
   // save stretchArr to res.locals to be sent back in the following middleware
   res.locals.stretches = stretchArr;
-  next ();
+  next();
 };
->>>>>>> dev:server/controllers/workOut.js
 
 module.exports = workOutController;
