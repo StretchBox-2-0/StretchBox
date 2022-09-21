@@ -10,15 +10,15 @@ const StretchDisplayWindow = ({ value, pgRefresh, currRefresh }) => {
     const stretchArr = stretches;
     if (value) {
       for (let i = 0; i < value.length; i++) {
-        stretchArr.push(<StretchInfo 
-          key = {stretchCounter}
-          value = {value[i]}
-          exerciseID = {value[i].id}
-          name =  {value[i].name}
-          muscle = {value[i].muscle}
+        stretchArr.push(<StretchInfo
+          key={value[i].id}
+          value={value[i]}
+          exerciseID={value[i].id}
+          name={value[i].name}
+          muscle={value[i].muscle}
           instructions={value[i].instructions}
           pgRefresh={pgRefresh}
-          currRefresh={currRefresh} 
+          currRefresh={currRefresh}
         />);
       }
     }
@@ -26,7 +26,7 @@ const StretchDisplayWindow = ({ value, pgRefresh, currRefresh }) => {
     setStretchCounter(stretchCounter + 1);
   }, [value]);
 
-  return(
+  return (
     <div className="StretchDisplayWindow">
       <button className="clear-button" onClick={(e) => setStretches([])}>CLEAR</button>
       <div>

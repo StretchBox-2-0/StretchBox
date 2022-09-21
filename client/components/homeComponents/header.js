@@ -7,9 +7,14 @@ import Login from '../login';
 
 const Header = ({ ID }) => {
 
+  // if( ID !== undefined ) { 
+  //   return (
+  //     <div> Logged in, test </div>
+  //   )
+  // }
   return (
     <div className='headerContainer'>
-
+      
       <div className='logo'>
         <img src={Logo} />
       </div>

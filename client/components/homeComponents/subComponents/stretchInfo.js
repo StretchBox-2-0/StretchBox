@@ -19,7 +19,7 @@ const StretchInfo = ({ value, exerciseID, name, muscle, instructions, pgRefresh,
       .then ((data) => data.json())
       .then ((data) => {
         console.log('favorite added')
-        pgRefresh(!currRefresh);
+        pgRefresh(!currRefresh)
       });
   };
 
@@ -27,6 +27,7 @@ const StretchInfo = ({ value, exerciseID, name, muscle, instructions, pgRefresh,
     <div className="stretch-info">
       <div className="name-muscle">
         <p><strong>Name:</strong> {name}</p>
+        <p><strong>ID:</strong> {exerciseID}</p>
 
         <p><strong>Muscle:</strong> {muscle}</p>
       </div>

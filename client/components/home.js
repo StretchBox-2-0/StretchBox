@@ -9,33 +9,33 @@ import Login from './login';
 import '../stylesheets/home.scss';
 
 
-const Home = ({ID}) => {
+const Home = ({ ID }) => {
   const [stretchData, setStretchData] = useState('');
   const [refresh, setRefresh] = useState(true);
   const [favorites, setFavorites] = useState([]);
 
-if(ID) {
+
   useEffect(() => {
-    console.log('fetching');
-    fetch(`/user/fav`)
-      .then((res) => res.json())
-      .then((data) => {
-        setFavorites(data);
-      })
-      .catch((err) => {
-        console.log('Error:', err);
-      });
+      console.log('fetching');
+      fetch(`/user/fav`)
+        .then((res) => res.json())
+        .then((data) => {
+          setFavorites(data);
+        })
+        .catch((err) => {
+          console.log('Error:', err);
+        });
   }, [refresh])
-};
+
 
 
   return (
     <>
-    
+
       <Header handleClickLogin />
       <div id="main-flex">
         <div className="dynamic-direction">
-          <RegionSelector value={setStretchData}/>
+          <RegionSelector value={setStretchData} />
           <StretchDisplay value={stretchData} pgRefresh={setRefresh} currRefresh={refresh} />
           <SavedStretches favoriteStretches={favorites} pgRefresh={setRefresh} currRefresh={refresh} />
         </div>

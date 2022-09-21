@@ -6,10 +6,10 @@ const SavedStretchDisplay = ({ favoriteStretches, pgRefresh, currRefresh }) => {
   const favorites = [];
   for (let i = 0; i < favoriteStretches.length; i++) {
     favorites.push(<SavedStretchInfo
-      key={`${i}`}
+      key={`${i}+saved`}
       stretch={favoriteStretches[i]}
       pgRefresh={pgRefresh}
-      currRefresh={ currRefresh}
+      currRefresh={currRefresh}
     />);
   }
   return (

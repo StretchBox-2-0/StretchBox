@@ -3,6 +3,11 @@ import '../../../stylesheets/stretchinfo.scss';
 
 const SavedStretchInfo = ({ stretch, pgRefresh, currRefresh }) => {
 
+  let muscle = '';
+  for (const key in stretch) {
+    if (stretch[key] )muscle = key;
+  }
+
   const deleteButton = (stretchid, name) => {
     console.log('delete button works');
     fetch('/user/fav', {
