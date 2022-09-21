@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../../stylesheets/stretchinfo.scss';
 
-const SavedStretchInfo = ({ stretch }) => {
+const SavedStretchInfo = ({ stretch, pgRefresh, currRefresh }) => {
 
   const deleteButton = (stretchid, name) => {
     console.log('delete button works');
@@ -15,7 +15,8 @@ const SavedStretchInfo = ({ stretch }) => {
       .then((data) => data.json())
       .then((data) => {
         console.log('successfully deleted');
-        // setRefresh(currentRefresh);
+        const currentRefresh
+        setRefresh(currentRefresh);
       });
   };
 

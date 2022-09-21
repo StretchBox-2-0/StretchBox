@@ -8,6 +8,8 @@ const SavedStretchDisplay = ({ favoriteStretches, pgRefresh, currRefresh }) => {
     favorites.push(<SavedStretchInfo
       key={`${i}`}
       stretch={favoriteStretches[i]}
+      pgRefresh={pgRefresh}
+      currRefresh={ currRefresh}
     />);
   }
   return (
