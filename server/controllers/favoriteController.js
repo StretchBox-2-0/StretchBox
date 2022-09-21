@@ -51,25 +51,14 @@ favoriteController.deleteFavorite = async (req, res, next) => {
 // create user
 favoriteController.createFavorite = async (req, res, next) => {
   try {
-    console.log('IN FAV')
+    console.log(req.body, req.params, req.query, 'this is the console from createFavorite controller')
     //work with front end to get proper names
-<<<<<<< HEAD
-    console.log(req.body, 'req.body')
-    // const {stretchid, name } = req.body;
-    // const userID = res.locals.user.userId; 
-    // console.log(userID, 'userID')
-    //sql goes here
-    // const query = `INSERT INTO favorite (userid, exerciseid, exercisename) VALUES (${userID}, ${exerciseid},'${name}')`;
-    // const dbResults = await database.query(query);  
-    // console.log(dbResults, 'dbResults');
-=======
     const { stretchid, name } = req.body;
     const userID = res.locals.user.userId; 
     //sql goes here
     const query = `INSERT INTO favorite (CombinedId, stretchID, userID, stretchName) VALUES ('user:${userID},exercise:${stretchid}',${stretchid}, ${userID}, '${name}')`;
     const dbResults = await database.query(query);  
 
->>>>>>> dev
     // store userID to locals to sendback to front-end
     // res.locals.userID = insertedId;
     return next();
