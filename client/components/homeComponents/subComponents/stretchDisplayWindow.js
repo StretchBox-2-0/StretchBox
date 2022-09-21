@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../../../stylesheets/stretchDisplayWindow.scss';
 import StretchInfo from './stretchInfo';
 
-const StretchDisplayWindow = ({value, }) => {
+const StretchDisplayWindow = ({ value, pgRefresh, currRefresh }) => {
   const [stretches, setStretches] = useState([]);
   const [stretchCounter, setStretchCounter] = useState(0);
 
@@ -16,7 +16,9 @@ const StretchDisplayWindow = ({value, }) => {
           exerciseID = {value[i].id}
           name =  {value[i].name}
           muscle = {value[i].muscle}
-          instructions = {value[i].instructions}
+          instructions={value[i].instructions}
+          pgRefresh={pgRefresh}
+          currRefresh={currRefresh} 
         />);
       }
     }

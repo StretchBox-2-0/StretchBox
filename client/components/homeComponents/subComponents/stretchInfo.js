@@ -4,7 +4,7 @@ import '../../../stylesheets/stretchinfo.scss';
 
 
 
-const StretchInfo = ({ value, exerciseID, name, muscle, instructions }) => {
+const StretchInfo = ({ value, exerciseID, name, muscle, instructions, pgRefresh, currRefresh }) => {
   
   const favoriteButtonNew = (exerciseID, name) => {
     console.log(exerciseID);
