@@ -7,25 +7,31 @@ const userController = {};
 
 // create user
 userController.createUser = async (req, res, next) => {
+  console.log('IN CREATE USER');
   try {
     //work with front end to get proper names
     const { username, password } = req.body;
     if(!username || !password ) return next('Missing username or password in the createUser controller');
     const passwordHash = await bcrypt.hash(password, SALT_WORK_FACTOR);
 
-    const queryGetMaxId = 'select max(userId) from user';
-    const idResults = await database.query(queryGetMaxId);
-    const query = `INSERT INTO USERS (userId, username, passwordHash) VALUES( ${idResults + 1}, ${username}, ${passwordHash})`;
+    const queryGetMaxId = 'select max(userid) from user';
+    //fix this later
+    const queryResults = await database.query(queryGetMaxId);
+    console.log(queryResults, 'queryResults')
+    // let idResults = queryResults[queryResults.length - 1]['userid']
+    // console.log(idResults, 'idResults')
+    // const query = `INSERT INTO USERS (userId, username, passwordHash) VALUES( ${idResults + 1}, ${username}, ${passwordHash})`;
 
-    const dbResults = await database.query(query);
+    // const dbResults = await database.query(query);
 
     // store userID to locals to sendback to front-end
-    res.locals.userID = dbResults[dbResults.length - 1 ].userId;
+    // res.locals.userID = dbResults[dbResults.length - 1].userId;
+    console.log('LEAVING CREATE')
     return next(); 
   } catch (err) {
     return next({
       log: 'error creating user',
-      message: { err: 'error creating user' }
+      message: { err: `error creating user ERROR: ${err}` }
     });
   }
 };

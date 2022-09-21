@@ -1,17 +1,22 @@
 const express = require('express');
 const request = require('request');
 const database = require ('./model');
+const dotenv = require('dotenv');
+const cookieParser = require('cookie-parser');
 const app = express();
 const port = 3000;
+dotenv.config();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
 
 const workOutRoute = require('./routes/workOut');
 const userRoute = require('./routes/user');
 // const userRoute = require('./routes/user')
 
-app.use('/workout', workOutRoute);
+// app.use('/workout', workOutRoute);
 app.use('/user', userRoute); 
 
 
