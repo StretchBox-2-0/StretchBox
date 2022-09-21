@@ -1,21 +1,29 @@
+<<<<<<< HEAD:server/controllers/apiController.js
 const request = require('request')
 const database = require('../model');
+=======
+const request = require('request');
+const database = require ('../model');
+>>>>>>> dev:server/controllers/workOut.js
 
-const apiController = {};
+const workOutController = {};
 
 //This api takes in all keys from req.body then makes an individual call to the database
 //it then randomly selects one stretch from the call and returns it to res.locals
+<<<<<<< HEAD:server/controllers/apiController.js
 apiController.getExercises = async (req, res, next) => {
   // console.log(req.body);
+=======
+workOutController.getExercises = async (req, res, next) => {
+>>>>>>> dev:server/controllers/workOut.js
   const keysArr = Object.keys(req.body);
-  // console.log(keysArr);
   // create an array of stretch objs to send back
   const stretchArr = [];
   for (let i = 0; i < keysArr.length; i++) {
     // grab the current key in keys array, and use that to get the value in req.body for that key
-    let key = keysArr[i];
-    let value = req.body[key];
-    let text = `SELECT * FROM stretches WHERE ${key} = 'true'`;
+    const key = keysArr[i];
+    const value = req.body[key];
+    const text = `SELECT * FROM stretches WHERE ${key} = 'true'`;
     // query the database for that muscle for that # of stretches
     await database
       .query(text)
@@ -27,21 +35,22 @@ apiController.getExercises = async (req, res, next) => {
             stretchArr.push({
               muscle: key,
               name: resp.rows[i].name,
-              instructions: resp.rows[i].instructions
-            })
+              instructions: resp.rows[i].instructions,
+              id: resp.rows[i].stretch_id
+            });
           }
         } else {
           // else push random value number of rows to array
-          let keys = [];
+          const keys = [];
           let i = 0;
           while (value > i) {
-            let index = Math.floor(Math.random() * (resp.rows.length - 0));
+            const index = Math.floor(Math.random() * (resp.rows.length - 0));
             if (keys.indexOf(index) > -1) continue;
             const stretch = {
               muscle: key,
               name: resp.rows[index].name,
               instructions: resp.rows[index].instructions
-            }
+            };
             // save the returned stretch objs in stretchArr
             stretchArr.push(stretch);
             keys.push(index);
@@ -53,6 +62,7 @@ apiController.getExercises = async (req, res, next) => {
         console.log('create stretch array error');
         return next({
           log: 'create stretch array error',
+<<<<<<< HEAD:server/controllers/apiController.js
           message: { er: 'create stretch error' }
         })
       })
@@ -62,5 +72,15 @@ apiController.getExercises = async (req, res, next) => {
   // console.log('final stretchArr', stretchArr);
   next()
 }
+=======
+          message: { er: 'create stretch error'}
+        });
+      });
+  }
+  // save stretchArr to res.locals to be sent back in the following middleware
+  res.locals.stretches = stretchArr;
+  next ();
+};
+>>>>>>> dev:server/controllers/workOut.js
 
-module.exports = apiController
+module.exports = workOutController;
