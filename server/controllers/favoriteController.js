@@ -31,18 +31,29 @@ favoriteController.createFavorite = async (req, res, next) => {
   try {
     console.log('IN FAV')
     //work with front end to get proper names
+<<<<<<< HEAD
+    console.log(req.body, 'req.body')
+    // const {stretchid, name } = req.body;
+    // const userID = res.locals.user.userId; 
+    // console.log(userID, 'userID')
+    //sql goes here
+    // const query = `INSERT INTO favorite (userid, exerciseid, exercisename) VALUES (${userID}, ${exerciseid},'${name}')`;
+    // const dbResults = await database.query(query);  
+    // console.log(dbResults, 'dbResults');
+=======
     const { stretchid, name } = req.body;
     const userID = res.locals.user.userId; 
     //sql goes here
     const query = `INSERT INTO favorite (CombinedId, stretchID, userID, stretchName) VALUES ('user:${userID},exercise:${exerciseID}',${stretchid}, ${userID}, '${name}')`;
     const dbResults = await database.query(query);  
 
+>>>>>>> dev
     // store userID to locals to sendback to front-end
     // res.locals.userID = insertedId;
     return next();
   } catch (err) {
     return next({
-      log: "error creating favorite exercises",
+      log: `${err}, error creating favorite exercises`,
       message: { err: `error creating favortie exercises ERROR: ${err}` },
     });
   }

@@ -12,3 +12,4 @@ router.post('/',jwtController.verify, favoriteControlller.createFavorite, (req, 
 
 // delete one request
 module.exports = router;
+

@@ -31,7 +31,7 @@ const RegionSelector = ({value}) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await fetch('/api', {
+      const response = await fetch('/workout', {
         method: 'POST',
         body: JSON.stringify({
           [currentRegion]: numberOfStretches,

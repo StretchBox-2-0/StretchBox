@@ -1,6 +1,6 @@
-import React, {useNavigate} from 'react';
+import React from 'react';
 
-const Signup = ({setID}) => {
+const Signup = ({ setID }) => {
   const handleClickSignup = (e) => {
     e.preventDefault();
     //take input fields and save to variables for request body
@@ -23,6 +23,8 @@ const Signup = ({setID}) => {
         // reset input fields to blank
         e.target[0].value = '';
         e.target[1].value = '';
+        //redirect to home page
+        location.href = "/";
       })
       .catch((err) => {
         console.log('Error:', err);
