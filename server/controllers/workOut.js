@@ -25,7 +25,8 @@ workOutController.getExercises = async (req, res, next) => {
             stretchArr.push({
               muscle: key,
               name: resp.rows[i].name,
-              instructions: resp.rows[i].instructions
+              instructions: resp.rows[i].instructions,
+              id: resp.rows[i].stretch_id
             });
           }
         } else {

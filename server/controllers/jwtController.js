@@ -1,5 +1,5 @@
-const jwt = require('jsonwebtoken');
-const dotenv = require('dotenv');
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
 dotenv.config();
 
 const JWT_SECRET = process.env.JWT_KEY;
@@ -7,20 +7,17 @@ const JWT_SECRET = process.env.JWT_KEY;
 const jwtController = {};
 
 jwtController.create = (req, res, next) => {
-  const { id, username, password } = res.locals.user;
   res.cookie(
-    'jwt',
+    "jwt",
     jwt.sign(
       {
-        userId: id,
-        username: username,
-        password: password,
+        userId: res.locals.userID,
       },
       JWT_SECRET,
-      { expiresIn: '7d' }
+      { expiresIn: "7d" }
     )
   );
-  next(); 
+  next();
 };
 
 jwtController.verify = (req, res, next) => {
@@ -29,19 +26,19 @@ jwtController.verify = (req, res, next) => {
     return next({
       log: null,
       status: 401,
-      message: 'Not Logged In!'
+      message: "Not Logged In!",
     });
   }
   try {
     res.locals.user = jwt.verify(req.cookies.jwt, JWT_SECRET);
     return next();
-  }
-  catch (err) {
+  } catch (err) {
     next({
       log: null,
       status: 401,
-      message: 'Invalid JWT',
+      message: "Invalid JWT",
     });
   }
 };
+
 module.exports = jwtController;
