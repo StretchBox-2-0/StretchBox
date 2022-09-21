@@ -11,7 +11,10 @@ const Header = (handleClickLogin) => {
         <img src={Logo} />
       </div>
       <div className='loginbox'>
-        <Login loginButton = {handleClickLogin} />
+        <button onClick = {() => {this.handleClickLogin}}> handle click test</button>
+        {/* <button onClick={(e) => favoriteButton()}>fave button test</button> */}
+
+        <Login handleClickLogin={handleClickLogin} />
       </div>
     </div>
   );

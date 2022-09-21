@@ -1,18 +1,20 @@
 import React from 'react';
 
-const Login = (loginButton) => {
+const Login = (handleClickLogin) => {
   return (
     <div className="login">
-      <form> 
+      <form id='loginForm'> 
         <label>Username:</label> 
         <input placeholder='Username'></input>
         <label>Password:</label>  
         <input type='password' placeholder='Password'></input>
-        <button type='submit' onSubmit= { () => loginButton() }>Submit</button>
+        <input type='submit' value='Login'></input>
+        {/* <button onClick={(e) => favoriteButton()}>fave button test</button> */}
+
       </form>
     </div>
 
-  );
+);
 };
 
 export default Login;

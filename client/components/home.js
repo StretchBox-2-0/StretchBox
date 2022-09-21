@@ -1,5 +1,5 @@
 /* eslint-disable react/function-component-definition */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import RegionSelector from './homeComponents/regionSelector';
 import StretchDisplay from './homeComponents/stretchDisplay';
 import SavedStretches from './homeComponents/savedStretches';
@@ -12,11 +12,25 @@ import '../stylesheets/home.scss';
 const Home = () => {
   const [stretchData, setStretchData] = useState('');
   const [ID, setID] = useState('');
-  const [refresh, setRefresh] = useState('');
+  const [refresh, setRefresh] = useState(true);
+  const [favorites, setFavorites] = useState([]);
+
+  useEffect(() => {
+    console.log('fetching');
+    fetch(`/favorites/${ID}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setFavorites(data);
+      })
+      .catch((err) => {
+        console.log('Error:', err);
+      });
+  }, [refresh]);
 
   //this handle click function handles the onclick in login.js
   const handleClickLogin = (e) => {
-    console.log("handle click login works")
+    console.log('handle click login works');
+    
     e.preventDefault();
     const username = e.target[0].value;
     const password = e.target[1].value;
@@ -31,7 +45,7 @@ const Home = () => {
       .then((data) => {
       //set the id in state to be used in future components
         setID(data.userId);
-      // TBD depending on how the data looks, maybe look at diff key
+        // TBD depending on how the data looks, maybe look at diff key
         e.target[0].value = '';
         e.target[0].value = '';
       });
@@ -57,12 +71,14 @@ const Home = () => {
 
   return (
     <>
+    
       <Header handleClickLogin={handleClickLogin} />
       <div id="main-flex">
         <div className="dynamic-direction">
           <RegionSelector value={setStretchData}/>
           <StretchDisplay value={stretchData} handleFavoriteButton = {favoriteButton} />
           <SavedStretches />
+          <button onClick={(e) => favoriteButton()}>fave button test</button>
         </div>
         {/* <div class="dynamic-direction">
           <SavedStretches />
