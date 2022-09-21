@@ -25,22 +25,6 @@ const Home = ({ID}) => {
         console.log('Error:', err);
       });
   }, [refresh]);
-  
-  const deleteButton = (e) => {
-    console.log('delete button works');
-    fetch('/user/fav', {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ stretchid: e.target.value.id, name: e.target.value.name }),
-    })
-      .then((data) => data.json())
-      .then((data) => {
-        const currentRefresh = !refresh;
-        setRefresh(currentRefresh);
-      });
-  };
 
   return (
     <>
@@ -50,7 +34,7 @@ const Home = ({ID}) => {
         <div className="dynamic-direction">
           <RegionSelector value={setStretchData}/>
           <StretchDisplay value={stretchData} />
-          <SavedStretches favoriteStretches={favorites} deleteButton={deleteButton} />
+          <SavedStretches favoriteStretches={favorites} pgRefresh={setRefresh} currRefresh={refresh} />
         </div>
         {/* <div class="dynamic-direction">
           <SavedStretches />
