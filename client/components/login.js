@@ -2,15 +2,10 @@ import React from 'react';
 
 const Login = ({setID}) => {
   const handleClickLogin = (e) => {
-    console.log(e.target.form[0].value);
-    // this is username^
-    console.log(e.target.form[1].value);
-    // this is password^
-
     e.preventDefault();
     console.log('handle click login works');
-    const username = e.target.form[0].value;
-    const password = e.target.form[1].value;
+    const username = e.target[0].value;
+    const password = e.target[1].value;
     // setLoginInfo({ username, password });
     fetch('/user/login', {
       method: 'POST',
@@ -22,16 +17,19 @@ const Login = ({setID}) => {
       .then((data) => data.json())
       .then((data) => {
         //set the id in state to be used in future components
-        setID(data.userId);
+        setID(data);
         // TBD depending on how the data looks, maybe look at diff key
-        e.target.form[0].value = '';
-        e.target.form[1].value = '';
+        e.target[0].value = '';
+        e.target[1].value = '';
+      })
+      .catch((err) => {
+        console.log('Error:', err);
       });
   };
 
   return (
     <div className="login">
-      <form id='loginForm' onClick={(e) => handleClickLogin(e)}> 
+      <form id='loginForm' onSubmit={(e) => handleClickLogin(e)}> 
         <label>Username:</label> 
         <input placeholder='Username'></input>
         <label>Password:</label>  

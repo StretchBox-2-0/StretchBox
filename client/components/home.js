@@ -28,19 +28,19 @@ const Home = ({ID}) => {
 
   const favoriteButton = (e) => {
     console.log('favorite button works');
-    //   fetch('// to add path to database', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(stretchid: e.target.value.id, userid: ID ),
-    //   })
-    //   .then ((data) => data.json())
-    //   .then ((data) => {
-    //     // do something with data
-    //    const currentRefresh = !refresh;
-    //    setRefresh(currentRefresh)
-    //   })
+      fetch('/user/fav', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ stretchid: e.target.value.id, name: e.target.value.name }),
+      })
+      .then ((data) => data.json())
+      .then ((data) => {
+        // do something with data
+       const currentRefresh = !refresh;
+        setRefresh(currentRefresh);
+      })
 
   };
 

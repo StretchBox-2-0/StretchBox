@@ -7,14 +7,14 @@ import Login from './components/login';
 import Signup from './components/signup';
 
 const App = () => {
-  const [ID, setID] = useState('')
+  const [id, setid] = useState('');
   return (
     <Router>
       <Routes>
         <Route element={<PrivateRoutes/>}/>
-        <Route path='/' element={<Home ID={ID} />} />  
-        <Route path='/signup' element={<Signup />} />
-        <Route path='/login' element={<Login setID={setID} />} />   
+        <Route path='/' element={<Home ID={id} />} />  
+        <Route path='/signup' element={<Signup setID = {setid} />} />
+        <Route path='/login' element={<Login setID = {setid} />} />   
       </Routes>
     </Router>
   );     
