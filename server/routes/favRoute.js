@@ -9,6 +9,9 @@ router.post('/',jwtController.verify, favoriteControlller.createFavorite, (req, 
 }); 
 
 // get all fav 
+router.get('/', favoriteController.getFavorite, (req, res) => {
+  // send back to frontend
+})
 
 // delete one request
 module.exports = router;
