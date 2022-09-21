@@ -6,7 +6,7 @@ const SavedStretchInfo = ({ stretch, deleteButton }) => {
   return (
     <div className="stretch-info">
       <div className="name-muscle">
-        <p><strong>Name:</strong> {stretch.name}</p>
+        <p><strong>Name:</strong> {stretch.stretchname}</p>
         <p><strong>Muscle:</strong> {stretch.muscle}</p>
       </div>
       <div className="instructions">

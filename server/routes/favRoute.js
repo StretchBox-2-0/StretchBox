@@ -11,6 +11,7 @@ router.post('/', jwtController.verify, favoriteController.createFavorite, (req, 
 // get all fav 
 router.get('/',jwtController.verify, favoriteController.getFavorite, (req, res) => {
   // send back to frontend
+  res.status(200).json(res.locals.favStretches)
 })
 
 // delete one request
