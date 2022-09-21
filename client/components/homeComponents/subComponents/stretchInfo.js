@@ -19,6 +19,7 @@ const StretchInfo = ({ value, exerciseID, name, muscle, instructions }) => {
       .then ((data) => data.json())
       .then ((data) => {
         console.log('favorite added')
+        pgRefresh(!currRefresh);
       });
   };
 

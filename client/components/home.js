@@ -33,7 +33,7 @@ const Home = ({ID}) => {
       <div id="main-flex">
         <div className="dynamic-direction">
           <RegionSelector value={setStretchData}/>
-          <StretchDisplay value={stretchData} />
+          <StretchDisplay value={stretchData} pgRefresh={setRefresh} currRefresh={refresh} />
           <SavedStretches favoriteStretches={favorites} pgRefresh={setRefresh} currRefresh={refresh} />
         </div>
         {/* <div class="dynamic-direction">

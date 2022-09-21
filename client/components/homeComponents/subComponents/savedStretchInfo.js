@@ -15,8 +15,7 @@ const SavedStretchInfo = ({ stretch, pgRefresh, currRefresh }) => {
       .then((data) => data.json())
       .then((data) => {
         console.log('successfully deleted');
-        const currentRefresh
-        setRefresh(currentRefresh);
+        pgRefresh(!currRefresh);
       });
   };
 
