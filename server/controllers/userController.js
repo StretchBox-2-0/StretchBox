@@ -43,13 +43,13 @@ userController.verifyUser = async (req, res, next) => {
     
     const query = 'SELECT * FROM USERS WHERE username = username';
     const dbResults = await database.query(query);
-
+    
     const passwordCorrect = await bcrypt.compare(
       password,
       dbResults.passwordHash
-    );
-
-    if (passwordCorrect) {
+      );
+      
+      if (passwordCorrect) {
       res.locals.userId = dbResults[0].userId; 
       return next(); 
     }
