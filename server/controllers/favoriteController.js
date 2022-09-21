@@ -12,11 +12,10 @@ favoriteController.getFavorite = async (req, res, next) => {
     //sql goes here
     const query = `SELECT * from favorite where userid = ${userID};`
     const dbResults = await database.query(query);
+    console.log(dbResults, 'dbResults')
 
     // store userID to locals to sendback to front-end
-    //send an array of objects (favorite exercises)
-    //change res.locals.userID to res.locals.favoriteExercises
-    // res.locals.userID = userID;
+    // res.locals.userID = insertedId;
     return next();
   } catch (err) {
     return next({
@@ -30,13 +29,11 @@ favoriteController.getFavorite = async (req, res, next) => {
 favoriteController.deleteFavorite = async (req, res, next) => {
   try {
     const { stretchid } = req.body
-    q.body; ceonsole.log('IN FAV')
     //work with front end to get proper names
     // const { stretchid, name } = req.body;
     const userID = res.locals.user.userId;
     //sql goes here
-    const query = `DELETE FROM FAVORITE where Combuserid{userID}
-  } D stretchid = ${stretchid}  ;`;
+    const query = `DELETE FROM FAVORITE where combinedid = 'user:${userID},exercise:${stretchid}';`;
     dbResults = await database.query(query);
 
     // store userID to locals to sendback to front-end
@@ -55,13 +52,11 @@ favoriteController.createFavorite = async (req, res, next) => {
   try {
     console.log('IN FAV')
     //work with front end to get proper names
-
     const { stretchid, name } = req.body;
     const userID = res.locals.user.userId;
     //sql goes here
     const query = `INSERT INTO favorite (CombinedId, stretchID, userID, stretchName) VALUES ('user:${userID},exercise:${stretchid}',${stretchid}, ${userID}, '${name}')`;
     const dbResults = await database.query(query);
-
     // store userID to locals to sendback to front-end
     // res.locals.userID = insertedId;
     return next();
@@ -74,36 +69,3 @@ favoriteController.createFavorite = async (req, res, next) => {
 };
 
 module.exports = favoriteController;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const query = `INSERT INTO favorite (userid, exerciseid, exercisename, instructions) VALUES( ${userid}, ${exerciseid}, NULL, NULL)`;
