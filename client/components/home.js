@@ -36,8 +36,8 @@ if(ID) {
       <div id="main-flex">
         <div className="dynamic-direction">
           <RegionSelector value={setStretchData}/>
-          <StretchDisplay value={stretchData} />
-          <SavedStretches favoriteStretches={favorites} deleteButton={deleteButton} />
+          <StretchDisplay value={stretchData} pgRefresh={setRefresh} currRefresh={refresh} />
+          <SavedStretches favoriteStretches={favorites} pgRefresh={setRefresh} currRefresh={refresh} />
         </div>
         {/* <div class="dynamic-direction">
           <SavedStretches />
