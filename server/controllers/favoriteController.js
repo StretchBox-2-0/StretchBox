@@ -27,8 +27,8 @@ favoriteController.getFavorite = async (req, res, next) => {
 //delete user
 favoriteController.deleteFavorite = async (req, res, next) => {
   try {
-    const {stretchid}
-    q.body;ceonsole.log('IN FAV')
+    // const {stretchid}
+    console.log('IN FAV');
     //work with front end to get proper names
     // const { stretchid, name } = req.body;
     const userID = res.locals.user.userId; 
