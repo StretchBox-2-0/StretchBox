@@ -20,7 +20,6 @@ const userRoute = require('./routes/user');
 app.use('/user', userRoute); 
 
 
-
 app.get('/', (req, res) => {
   res.sendStatus(200);
 });

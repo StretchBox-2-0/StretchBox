@@ -1,18 +1,17 @@
 import React from 'react';
 
-const Login = ({setID}) => {
-  const handleClickLogin = (e) => {
+const Signup = ({setID}) => {
+  const handleClickSignup = (e) => {
     console.log(e.target.form[0].value);
     // this is username^
     console.log(e.target.form[1].value);
     // this is password^
-
     e.preventDefault();
-    console.log('handle click login works');
+    console.log('handle click signup works');
     const username = e.target.form[0].value;
     const password = e.target.form[1].value;
     // setLoginInfo({ username, password });
-    fetch('/user/login', {
+    fetch('/user/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -29,19 +28,19 @@ const Login = ({setID}) => {
       });
   };
 
-  return (
-    <div className="login">
-      <form id='loginForm' onClick={(e) => handleClickLogin(e)}> 
-        <label>Username:</label> 
-        <input placeholder='Username'></input>
-        <label>Password:</label>  
-        <input type='password' placeholder='Password'></input>
-        <input type= 'submit' value='Login'></input>
 
+  return (
+    <div className="signup">
+      <form id='signup' onClick={(e) => handleClickSignup(e)}>
+        <label>Username:</label>
+        <input placeholder='Username'></input>
+        <label>Password:</label>
+        <input type='password' placeholder='Password'></input>
+        <input type='submit' value='Signup'></input>
       </form>
     </div>
 
   );
 };
 
-export default Login;
+export default Signup;
